@@ -23,20 +23,23 @@ export default class DownloadText extends React.Component<IProps, IState>{
         }
     }
 
-    validateYoutube(link: string){
-        if (link == 'lol'){
-            this.setState({buttonText: <CircularProgress size={20} />})
-            setTimeout(() => {
-                this.setState({downloadDisabled: false})
-                this.setState({buttonText: "Download"})
-            }, 5000);
 
+    validateYoutube(link: string){
+        this.setState({buttonText: <CircularProgress size={20} />})
+        if (link.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/)){
+            setTimeout(() => {
+                this.setState({
+                    downloadDisabled: false,
+                })
+            }, 5000);
         }else{
-            this.setState({downloadDisabled: true})
+            setTimeout(() => {
+                this.setState({
+                    downloadDisabled: true,
+                })
+            }, 5000);
         }
     }
-
-
 
     render(){
         return (
