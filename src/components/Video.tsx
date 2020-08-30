@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Theme, createStyles, makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -45,25 +45,40 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export default function MediaControlCard() {
+export default function MediaControlCard(props: any) {
     const classes = useStyles();
     const theme = useTheme();
+
+    // const [title, setTitle] = useState('Welcome');
+    // const [thumbnail, setThumbnail] = useState('');
+    // const [url, setUrl] = useState('');
+    //
+    // const changeTitle = (title: string) => {
+    //     setTitle(title);
+    // }
+    //
+    // const changeThumbnail = (image: string) => {
+    //     setThumbnail(image);
+    // }
+    //
+    // const changeUrl = (url: string) => {
+    //     setUrl(url);
+    // }
+
+    const {title, thumbnail, url} = props;
 
     return (
         <Card className={classes.cardTop}>
             <div className={classes.details}>
                 <CardContent className={classes.content}>
                     <Typography component="h5" variant="h5">
-                        Youtube Video
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                        Channel Name
+                        {title}
                     </Typography>
                 </CardContent>
                 <div className={classes.controls}>
                     <IconButton aria-label="previous">
                         <GetAppIcon onClick={() => {
-                            alert('Download')
+                            alert(url)
                         }} />
                     </IconButton>
                     <FormControl variant="filled" className={classes.formControl}>
@@ -81,7 +96,7 @@ export default function MediaControlCard() {
             </div>
             <CardMedia
                 className={classes.cover}
-                image="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.hzIAtHq813QbbgJdXXgQvgHaEK%26pid%3DApi&f=1"
+                image={thumbnail}
                 title="Live from space album cover"
             />
         </Card>

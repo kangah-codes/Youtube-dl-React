@@ -10,7 +10,7 @@ interface IState{
 }
 
 interface IProps{
-
+    addDownload: any;
 }
 
 export default class DownloadText extends React.Component<IProps, IState>{
@@ -27,17 +27,17 @@ export default class DownloadText extends React.Component<IProps, IState>{
     validateYoutube(link: string){
         this.setState({buttonText: <CircularProgress size={20} />})
         if (link.match(/http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/)){
-            setTimeout(() => {
-                this.setState({
-                    downloadDisabled: false,
-                })
-            }, 5000);
+            this.setState({
+                downloadDisabled: false,
+                buttonText: 'Download'
+            })
+
+            this.props.addDownload(link);
         }else{
-            setTimeout(() => {
-                this.setState({
-                    downloadDisabled: true,
-                })
-            }, 5000);
+            this.setState({
+                downloadDisabled: true,
+                buttonText: 'Download'
+            })
         }
     }
 
